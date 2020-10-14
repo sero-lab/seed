@@ -15,7 +15,10 @@
             p {
                 color: #ffffff;
                 margin-bottom: 3px !important;
+                float: left;
             }
+
+            
         }
 
         .seed-header {
@@ -113,7 +116,7 @@
 
             .content-list {
                 .content-list-data {
-                    height: calc(100vh - 516px);
+                    height: calc(100vh - 505px);
                     overflow-y: scroll;
 
                     li {
@@ -408,5 +411,17 @@
 }
 
 .ant-statistic-content {
-    font-size: 20px !important;
+    // font-size: 20px !important;
+}
+
+.lookmodal {
+    display: flex;
+
+    div {
+        text-align: center;
+        flex: 1;
+        .ant-statistic-title{
+            color: #1c2635 !important;
+        }
+    }
 }

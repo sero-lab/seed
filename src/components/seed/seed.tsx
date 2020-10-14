@@ -1,11 +1,12 @@
 import React from 'react';
 import contract from '../../api/contract';
 import service from '../../api/service';
-import { Modal, InputNumber, Input, notification, Button, Statistic, Descriptions, Switch, Radio } from 'antd';
+import { Modal, InputNumber, Input, notification, Button, Statistic, Descriptions, Switch, Radio,Card } from 'antd';
 import { BigNumber } from "bignumber.js";
 import './seed.scss';
 import i18n from '../../i18n'
 import { composeInitialProps } from 'react-i18next';
+import { log } from 'console';
 const { Countdown } = Statistic;
 
 interface item {
@@ -40,11 +41,14 @@ interface Seeds {
   visiblePledge: boolean,
   visibleDetail: boolean,
   visibleRules: boolean,
+  visiblelook: boolean,
   pledgeNum: any,
   visibleDestruction: boolean,
   destructionNum: any,
   detailModal: any,
-  radioStatu: boolean
+  radioStatu: boolean,
+  tokennum:number,
+  tokenseronum:number,
 }
 
 class Seed extends React.Component<any, Seeds> {
@@ -66,11 +70,14 @@ class Seed extends React.Component<any, Seeds> {
     visiblePledge: false,
     visibleDetail: false,
     visibleRules: false,
+    visiblelook: false,
     pledgeNum: 100,
     visibleDestruction: false,
     destructionNum: 1,
     detailModal: {},
-    radioStatu: false
+    radioStatu: false,
+    tokennum:0,
+    tokenseronum:0
   }
   componentDidMount() {
     let that = this;
@@ -81,7 +88,8 @@ class Seed extends React.Component<any, Seeds> {
       clearInterval(interId)
     }
     interId = setInterval(() => that.getdata(), 5 * 10 ** 3);
-    sessionStorage.setItem("interId", interId)
+    sessionStorage.setItem("interId", interId);
+    
   }
 
   getdata = () => {
@@ -102,6 +110,16 @@ class Seed extends React.Component<any, Seeds> {
       let startmainpkr = strmainpk.substring(0, 5);
       let endmainpkr = strmainpk.substring(length - 5, length)
       let strmainpkr = startmainpkr + "..." + endmainpkr;
+      contract.IToken(userobj.MainPKr).then((res)=>{
+        that.setState({
+          tokennum:fromValue(res[0],18).toNumber()
+        })
+      })
+      contract.balanceOf().then((res)=>{
+        that.setState({
+          tokenseronum:fromValue(res.tkn.SERO,18).toNumber()
+        })
+      })
       that.ListShow(userobj.MainPKr);
       that.myExchangeValue(userobj.MainPKr);
       that.setState({
@@ -525,6 +543,28 @@ class Seed extends React.Component<any, Seeds> {
       visibleRules: false
     })
   }
+
+  openLook= () => {
+    let that = this;
+    that.setState({
+      visiblelook: true
+    })
+  }
+  handlelookOk= () => {
+    let that = this;
+    that.setState({
+      visiblelook: false
+    })
+  };
+
+  handlelookCancel= () => {
+    let that = this;
+    that.setState({
+      visiblelook: false
+    })
+  };
+
+
   viewDetail(e: any) {
     let that = this;
     let userobj = that.state.Listdata.find(function (item: any) {
@@ -635,6 +675,37 @@ class Seed extends React.Component<any, Seeds> {
                 </table>
                 <div style={{ height: "30px" }}>
                   <Button style={{ float: "right" }} onClick={() => this.closeRules()} type="primary">OK</Button>
+                </div>
+              </div>
+            </Modal>
+            <p style={{float:"right"}} onClick={() => this.openLook()}>
+            {i18n.t("Viewcirculation")}
+            </p>
+            <Modal
+              visible={this.state.visiblelook}
+              title={i18n.t("Viewcirculation")}
+              onOk={this.handlelookOk}
+              onCancel={this.handlelookCancel}
+              okText={i18n.t("confirm")}
+              cancelText={i18n.t("cancel")}
+            >
+              <div className="lookmodal">
+                <div>
+                  <Card>
+                    <Statistic
+                      title={i18n.t("Totalcirculation")}
+                      suffix="SEED"
+                      value={this.state.tokennum} 
+                      /> 
+                  </Card>
+                </div>
+                <div>
+                  <Card>
+                  <Statistic
+                    title={i18n.t("Totalpledge")}
+                    suffix="SERO"
+                    value={this.state.tokenseronum} />
+                     </Card>
                 </div>
               </div>
             </Modal>

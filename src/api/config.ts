@@ -1,4 +1,5 @@
 export const address: string = "2mJjTksWLXMKbyyPi2JfQfDLUcGn3QyWvZT5QZXJpEEWP23Jseih2Qm1z2MFfGw4oAJvGN3H2B8r2CwyW3YWRmpY";
+export const address1: string = "LHQhhHboKziVF7yQpayBqpKVU9cBY7nu7VSaBTfDuSfFLETvDpgrA5coAy5sro3Lvv4PmcaimkvvejSF64Dn6xd";
 export const abi: any = [
     {
         "inputs": [],
@@ -144,4 +145,19 @@ export const abi: any = [
         "stateMutability": "nonpayable",
         "type": "function"
     }
+]
+export const abi1:any=[
+	{
+		"inputs": [],
+		"name": "totalSupply",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
 ]

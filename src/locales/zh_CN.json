@@ -42,5 +42,7 @@
   "rule9":"不将SEED参与交易，你将不会有任何SERO的损失",
   "Dayrateofreturn":"天，回报率",
   "the":"第",
-  "Viewall":"查看全部"
+  "Viewall":"查看全部",
+  "Viewcirculation":"查看流通",
+  "Totalcirculation":"总流通"
 }
