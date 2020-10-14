@@ -77,7 +77,7 @@ class Service {
             barColor: "#2a3a51",
             navColor: "#2a3a51",
             barMode: "dark",
-            navMode: "dark"
+            navMode: "light"
         }
         return new Promise((resolve, reject) => {
             seropp.init(dapp, function (rest: any, err: any) {
