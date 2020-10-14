@@ -53,7 +53,7 @@ class Seed extends React.Component<any, Seeds> {
     seroBalance: "",
     backedValue: 0,
     claimantValue: 0,
-    time: 300,
+    time: 86400,
     mask: false,
     data: [],
     dataArr: [],
@@ -121,7 +121,6 @@ class Seed extends React.Component<any, Seeds> {
     })
   }
   radiobtn = (e: any) => {
-    console.log(e)
     let that = this;
     that.setState({
       radioStatu: e

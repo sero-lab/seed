@@ -1,7 +1,6 @@
 import * as config from './config';
 import axios from 'axios';
 import i18n from '../i18n';
-// import { resolve } from 'dns';
 const seropp = require("sero-pp");
 
 class Service {
