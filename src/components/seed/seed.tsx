@@ -1,12 +1,11 @@
 import React from 'react';
 import contract from '../../api/contract';
 import service from '../../api/service';
-import { Modal, InputNumber, Input, notification, Button, Statistic, Descriptions, Switch, Radio,Card } from 'antd';
+import { Modal, InputNumber, Input, Button, Statistic, Descriptions, Switch,Card } from 'antd';
 import { BigNumber } from "bignumber.js";
 import './seed.scss';
 import i18n from '../../i18n'
-import { composeInitialProps } from 'react-i18next';
-import { log } from 'console';
+// import { composeInitialProps } from 'react-i18next';
 const { Countdown } = Statistic;
 
 interface item {
@@ -690,8 +689,8 @@ class Seed extends React.Component<any, Seeds> {
                 <div>
                   <Card>
                     <Statistic
-                      title={i18n.t("Totalcirculation")}
-                      suffix="SEED"
+                      title={`${i18n.t("Totalcirculation")}SEED`}
+                      
                       value={this.state.tokennum} 
                       /> 
                   </Card>
@@ -699,8 +698,7 @@ class Seed extends React.Component<any, Seeds> {
                 <div>
                   <Card>
                   <Statistic
-                    title={i18n.t("Totalpledge")}
-                    suffix="SERO"
+                    title={`${i18n.t("Totalpledge")}SERO`}
                     value={this.state.tokenseronum} />
                      </Card>
                 </div>
