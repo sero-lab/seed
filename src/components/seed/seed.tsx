@@ -89,7 +89,6 @@ class Seed extends React.Component<any, Seeds> {
     }
     interId = setInterval(() => that.getdata(), 5 * 10 ** 3);
     sessionStorage.setItem("interId", interId);
-    
   }
 
   getdata = () => {
@@ -129,8 +128,6 @@ class Seed extends React.Component<any, Seeds> {
         mainpkr: userobj.MainPKr,
         account: userobj,
         mask: false,
-        destructionNum: 1,
-        pledgeNum: 100,
         seedBalance: new BigNumber(userobj.Balance.get("SEED")).dividedBy(10 ** 18).toFixed(2),
         seroBalance: new BigNumber(userobj.Balance.get("SERO")).dividedBy(10 ** 18).toFixed(2),
       })
