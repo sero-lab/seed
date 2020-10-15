@@ -19,9 +19,7 @@ class Service {
                         clearInterval(id)
                         resolve(rest);
                     } else {
-
                     }
-
                 }).catch(e => {
                     reject(e)
                 })

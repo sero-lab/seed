@@ -139,7 +139,9 @@ class Seed extends React.Component<any, Seeds> {
     that.setState({
       radioStatu: e
     });
+
     that.getdata();
+
   }
 
   ListShow = (str: string) => {
@@ -168,7 +170,7 @@ class Seed extends React.Component<any, Seeds> {
           const newTime = parseInt((new Date().getTime() / 1000).toString());
           const extractable = that.transformation(createTime, newTime);
           const c = newTime - lastWithDrawTime;
-          const countDown = (that.state.time + lastWithDrawTime) * 1000;
+          const countDown=(createTime+that.state.time*extracted.today)*1000;
           if (extracted.percentage !== 0) {
             objShow.Withdrawn = fromValue(res.result[i].data.total, 18).multipliedBy(extracted.percentage)
             new BigNumber(res.result[i].data.total).multipliedBy(extracted.percentage).dividedBy(10 ** 18).toString();
@@ -185,6 +187,8 @@ class Seed extends React.Component<any, Seeds> {
           }
           if (newTime * 1000 < countDown) {
             objShow.lookDetail = false
+          }else{
+            objShow.lookDetail = true
           }
           if (createTime + that.state.time * 10 < lastWithDrawTime) {
             objShow.operation = "state";
@@ -227,7 +231,7 @@ class Seed extends React.Component<any, Seeds> {
           const newTime = parseInt((new Date().getTime() / 1000).toString());
           const extractable = that.transformation(createTime, newTime);
           const c = newTime - lastWithDrawTime;
-          const countDown = (that.state.time + lastWithDrawTime) * 1000;
+          const countDown=(createTime+that.state.time*extracted.today)*1000;
           if (extracted.percentage !== 0) {
             objShow.Withdrawn = fromValue(res.result[i].data.total, 18).multipliedBy(extracted.percentage)
             new BigNumber(res.result[i].data.total).multipliedBy(extracted.percentage).dividedBy(10 ** 18).toString();
@@ -244,6 +248,8 @@ class Seed extends React.Component<any, Seeds> {
           }
           if (newTime * 1000 < countDown) {
             objShow.lookDetail = false
+          }else{
+            objShow.lookDetail = true
           }
           if (createTime + that.state.time * 10 < lastWithDrawTime) {
             objShow.operation = "state";
@@ -769,7 +775,6 @@ class Seed extends React.Component<any, Seeds> {
                 <button onClick={this.showPledgeModal}>
                   {i18n.t("culture")}
                   SEED
-                  
                 </button>
                 <Modal
                   title={i18n.t("Inputthenumberofseedcultured")}
