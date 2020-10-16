@@ -50,7 +50,7 @@
             position: relative;
             z-index: 2;
             border: 2px solid #707a8a;
-
+            height: 70vh;
             .content-header {
                 margin: 0px 25px;
                 margin-bottom: 0px;
@@ -114,7 +114,8 @@
 
             .content-list {
                 .content-list-data {
-                    height: calc(100vh - 516px);
+                    min-height: calc(70vh - 216px);
+                    max-height: calc(70vh - 231px);
                     overflow-y: scroll;
 
                     li {
@@ -144,6 +145,7 @@
                         }
 
                         .withdrawal {
+                            display: none;
                             color: #ff7400;
                         }
 
@@ -299,6 +301,7 @@
 .no-click {
     pointer-events: none;
     color: gray !important;
+    display: none;
 }
 
 .modalbox {

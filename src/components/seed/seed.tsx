@@ -169,7 +169,7 @@ class Seed extends React.Component<any, Seeds> {
           const extracted = that.transformation(createTime, lastWithDrawTime);
           const newTime = parseInt((new Date().getTime() / 1000).toString());
           const extractable = that.transformation(createTime, newTime);
-          const c = newTime - lastWithDrawTime;
+        
           const countDown=(createTime+that.state.time*extracted.today)*1000;
           if (extracted.percentage !== 0) {
             objShow.Withdrawn = fromValue(res.result[i].data.total, 18).multipliedBy(extracted.percentage)
@@ -180,16 +180,16 @@ class Seed extends React.Component<any, Seeds> {
             objShow.dayNum = extractable.today
             objShow.todaypercentage = extractable.todaypercentage
           }
-          if (c < that.state.time) {
-            objShow.operation = "state";
-          } else {
-            objShow.operation = "statein";
-          }
+         
           if (newTime * 1000 < countDown) {
             objShow.lookDetail = false
+            objShow.operation = "state";
           }else{
             objShow.lookDetail = true
+            objShow.operation = "statein";
           }
+
+
           if (createTime + that.state.time * 10 < lastWithDrawTime) {
             objShow.operation = "state";
             objShow.showDetail = false
@@ -230,7 +230,6 @@ class Seed extends React.Component<any, Seeds> {
           const extracted = that.transformation(createTime, lastWithDrawTime);
           const newTime = parseInt((new Date().getTime() / 1000).toString());
           const extractable = that.transformation(createTime, newTime);
-          const c = newTime - lastWithDrawTime;
           const countDown=(createTime+that.state.time*extracted.today)*1000;
           if (extracted.percentage !== 0) {
             objShow.Withdrawn = fromValue(res.result[i].data.total, 18).multipliedBy(extracted.percentage)
@@ -241,16 +240,15 @@ class Seed extends React.Component<any, Seeds> {
             objShow.dayNum = extractable.today
             objShow.todaypercentage = extractable.todaypercentage
           }
-          if (c < that.state.time) {
-            objShow.operation = "state";
-          } else {
-            objShow.operation = "statein";
-          }
+          
           if (newTime * 1000 < countDown) {
             objShow.lookDetail = false
+            objShow.operation = "state";
           }else{
             objShow.lookDetail = true
+            objShow.operation = "statein";
           }
+
           if (createTime + that.state.time * 10 < lastWithDrawTime) {
             objShow.operation = "state";
             objShow.showDetail = false
