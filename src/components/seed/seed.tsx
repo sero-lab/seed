@@ -600,7 +600,7 @@ class Seed extends React.Component<any, Seeds> {
             >
               <div className="rules">
                 <h2 className="rules-c">
-                  SEEO
+                  SEED
                   {i18n.t("rule1")}
                   </h2>
                 <p className="rules-c">
