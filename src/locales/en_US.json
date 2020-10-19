@@ -40,7 +40,7 @@
   "rule7":"The laboratory will be the first to pledge 10000 SERO, and submit the SEED produced every day to CORSWAP at 1:100 SERO to provide SEED/SERO liquidity",
   "rule8":"Each circulating SEED corresponds to 100 SERO in the SEED contract pool",
   "rule9":"If SEED is not involved in the transaction, you will not have any SERO loss",
-  "Dayrateofreturn":"Days, Rate of Return",
+  "Dayrateofreturn":"Days, recovery rate",
   "the":"the",
   "Viewall":"ViewAll",
   "Viewcirculation":"View Circulation",
