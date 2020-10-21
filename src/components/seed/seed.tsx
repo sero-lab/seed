@@ -926,12 +926,12 @@ class Seed extends React.Component<any, Seeds> {
               <Descriptions.Item label="">
                 <Statistic value={detailModal.seednum}
                   title={i18n.t("Totalculture")}
-                  suffix={"SEED"} />
+                  suffix={"SEED"}  />
               </Descriptions.Item>
               <Descriptions.Item label="">
                 <Statistic value={detailModal.seednum - detailModal.Unlocked}
-                  title={i18n.t("Incultivation")}
-                  suffix={"SEED"} />
+                  title={i18n.t("Incultivation") }
+                  suffix={"SEED"}  precision={3}/>
               </Descriptions.Item>
               <Descriptions.Item label="">
                 <Statistic value={detailModal.seronum}
@@ -943,17 +943,17 @@ class Seed extends React.Component<any, Seeds> {
               <Descriptions.Item label="">
                 <Statistic value={detailModal.Unlocked && detailModal.Unlocked.toString(10)}
                   title={i18n.t("Harvested")}
-                  suffix={"SEED"} />
+                  suffix={"SEED"}  precision={3}/>
               </Descriptions.Item>
               <Descriptions.Item label="">
                 <Statistic value={detailModal.Withdrawn && detailModal.Withdrawn.toString(10)}
                   title={i18n.t("Extracted")}
-                  suffix={"SEED"} />
+                  suffix={"SEED"} precision={3}/>
               </Descriptions.Item>
               <Descriptions.Item label="">
                 <Statistic value={detailModal.Unlocked && detailModal.Withdrawn && detailModal.Unlocked.minus(detailModal.Withdrawn).toString(10)}
                   title={i18n.t("Extractable")}
-                  suffix={"SEED"} />
+                  suffix={"SEED"} precision={3}/>
               </Descriptions.Item>
             </Descriptions>
 
@@ -982,13 +982,13 @@ function fromValue(v: number | string | undefined, d: number): BigNumber {
 }
 
 
-function toValue(v: number | string | undefined, d: number): BigNumber {
-  if (v) {
-    return new BigNumber(v).multipliedBy(10 ** d)
-  } else {
-    return new BigNumber(0)
-  }
-}
+// function toValue(v: number | string | undefined, d: number): BigNumber {
+//   if (v) {
+//     return new BigNumber(v).multipliedBy(10 ** d)
+//   } else {
+//     return new BigNumber(0)
+//   }
+// }
 
 
 
