@@ -190,7 +190,7 @@ class Seed extends React.Component<any, Seeds> {
           }
 
 
-          if (createTime + that.state.time * 10 < lastWithDrawTime) {
+          if (createTime + that.state.time *9 < lastWithDrawTime) {
             objShow.operation = "state";
             objShow.showDetail = false
           }
@@ -249,7 +249,7 @@ class Seed extends React.Component<any, Seeds> {
             objShow.operation = "statein";
           }
 
-          if (createTime + that.state.time * 10 < lastWithDrawTime) {
+          if (createTime + that.state.time * 9 < lastWithDrawTime) {
             objShow.operation = "state";
             objShow.showDetail = false
           }
