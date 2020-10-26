@@ -502,8 +502,9 @@ class Seed extends React.Component<any, Seeds> {
   onChangeSeedNum(e: any) {
     let that = this;
     if (e != null) {
+      let seedinfo=Math.floor(e);
       that.setState({
-        pledgeNum: e * 100
+        pledgeNum: seedinfo * 100
       })
     } else {
       that.setState({
@@ -514,8 +515,9 @@ class Seed extends React.Component<any, Seeds> {
   onChangeSeroNum(e: any) {
     let that = this;
     if (e != null) {
+      let seroinfo=Math.floor(e);
       that.setState({
-        destructionNum: e
+        destructionNum: seroinfo
       })
     } else {
       that.setState({
