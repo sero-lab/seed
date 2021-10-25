@@ -1,11 +1,11 @@
 import React from 'react';
 import contract from '../../api/contract';
 import service from '../../api/service';
-import { Modal, InputNumber, Input, notification, Button, Statistic, Descriptions, Switch, Radio } from 'antd';
+import { Modal, InputNumber, Input, Button, Statistic, Descriptions, Switch,Card } from 'antd';
 import { BigNumber } from "bignumber.js";
 import './seed.scss';
 import i18n from '../../i18n'
-import { composeInitialProps } from 'react-i18next';
+// import { composeInitialProps } from 'react-i18next';
 const { Countdown } = Statistic;
 
 interface item {
@@ -40,11 +40,14 @@ interface Seeds {
   visiblePledge: boolean,
   visibleDetail: boolean,
   visibleRules: boolean,
+  visiblelook: boolean,
   pledgeNum: any,
   visibleDestruction: boolean,
   destructionNum: any,
   detailModal: any,
-  radioStatu: boolean
+  radioStatu: boolean,
+  tokennum:number,
+  tokenseronum:number,
 }
 
 class Seed extends React.Component<any, Seeds> {
@@ -53,7 +56,7 @@ class Seed extends React.Component<any, Seeds> {
     seroBalance: "",
     backedValue: 0,
     claimantValue: 0,
-    time: 300,
+    time: 86400,
     mask: false,
     data: [],
     dataArr: [],
@@ -66,11 +69,14 @@ class Seed extends React.Component<any, Seeds> {
     visiblePledge: false,
     visibleDetail: false,
     visibleRules: false,
+    visiblelook: false,
     pledgeNum: 100,
     visibleDestruction: false,
     destructionNum: 1,
     detailModal: {},
-    radioStatu: false
+    radioStatu: false,
+    tokennum:0,
+    tokenseronum:0
   }
   componentDidMount() {
     let that = this;
@@ -81,7 +87,7 @@ class Seed extends React.Component<any, Seeds> {
       clearInterval(interId)
     }
     interId = setInterval(() => that.getdata(), 5 * 10 ** 3);
-    sessionStorage.setItem("interId", interId)
+    sessionStorage.setItem("interId", interId);
   }
 
   getdata = () => {
@@ -102,6 +108,16 @@ class Seed extends React.Component<any, Seeds> {
       let startmainpkr = strmainpk.substring(0, 5);
       let endmainpkr = strmainpk.substring(length - 5, length)
       let strmainpkr = startmainpkr + "..." + endmainpkr;
+      contract.IToken(userobj.MainPKr).then((res)=>{
+        that.setState({
+          tokennum:fromValue(res[0],18).toNumber()
+        })
+      })
+      contract.balanceOf().then((res)=>{
+        that.setState({
+          tokenseronum:fromValue(res.tkn.SERO,18).toNumber()
+        })
+      })
       that.ListShow(userobj.MainPKr);
       that.myExchangeValue(userobj.MainPKr);
       that.setState({
@@ -111,8 +127,6 @@ class Seed extends React.Component<any, Seeds> {
         mainpkr: userobj.MainPKr,
         account: userobj,
         mask: false,
-        destructionNum: 1,
-        pledgeNum: 100,
         seedBalance: new BigNumber(userobj.Balance.get("SEED")).dividedBy(10 ** 18).toFixed(2),
         seroBalance: new BigNumber(userobj.Balance.get("SERO")).dividedBy(10 ** 18).toFixed(2),
       })
@@ -121,12 +135,13 @@ class Seed extends React.Component<any, Seeds> {
     })
   }
   radiobtn = (e: any) => {
-    console.log(e)
     let that = this;
     that.setState({
       radioStatu: e
     });
+
     that.getdata();
+
   }
 
   ListShow = (str: string) => {
@@ -154,8 +169,8 @@ class Seed extends React.Component<any, Seeds> {
           const extracted = that.transformation(createTime, lastWithDrawTime);
           const newTime = parseInt((new Date().getTime() / 1000).toString());
           const extractable = that.transformation(createTime, newTime);
-          const c = newTime - lastWithDrawTime;
-          const countDown = (that.state.time + lastWithDrawTime) * 1000;
+        
+          const countDown=(createTime+that.state.time*extracted.today)*1000;
           if (extracted.percentage !== 0) {
             objShow.Withdrawn = fromValue(res.result[i].data.total, 18).multipliedBy(extracted.percentage)
             new BigNumber(res.result[i].data.total).multipliedBy(extracted.percentage).dividedBy(10 ** 18).toString();
@@ -165,15 +180,17 @@ class Seed extends React.Component<any, Seeds> {
             objShow.dayNum = extractable.today
             objShow.todaypercentage = extractable.todaypercentage
           }
-          if (c < that.state.time) {
-            objShow.operation = "state";
-          } else {
-            objShow.operation = "statein";
-          }
+         
           if (newTime * 1000 < countDown) {
             objShow.lookDetail = false
+            objShow.operation = "state";
+          }else{
+            objShow.lookDetail = true
+            objShow.operation = "statein";
           }
-          if (createTime + that.state.time * 10 < lastWithDrawTime) {
+
+
+          if (createTime + that.state.time *9 < lastWithDrawTime) {
             objShow.operation = "state";
             objShow.showDetail = false
           }
@@ -213,8 +230,7 @@ class Seed extends React.Component<any, Seeds> {
           const extracted = that.transformation(createTime, lastWithDrawTime);
           const newTime = parseInt((new Date().getTime() / 1000).toString());
           const extractable = that.transformation(createTime, newTime);
-          const c = newTime - lastWithDrawTime;
-          const countDown = (that.state.time + lastWithDrawTime) * 1000;
+          const countDown=(createTime+that.state.time*extracted.today)*1000;
           if (extracted.percentage !== 0) {
             objShow.Withdrawn = fromValue(res.result[i].data.total, 18).multipliedBy(extracted.percentage)
             new BigNumber(res.result[i].data.total).multipliedBy(extracted.percentage).dividedBy(10 ** 18).toString();
@@ -224,15 +240,16 @@ class Seed extends React.Component<any, Seeds> {
             objShow.dayNum = extractable.today
             objShow.todaypercentage = extractable.todaypercentage
           }
-          if (c < that.state.time) {
-            objShow.operation = "state";
-          } else {
-            objShow.operation = "statein";
-          }
+          
           if (newTime * 1000 < countDown) {
             objShow.lookDetail = false
+            objShow.operation = "state";
+          }else{
+            objShow.lookDetail = true
+            objShow.operation = "statein";
           }
-          if (createTime + that.state.time * 10 < lastWithDrawTime) {
+
+          if (createTime + that.state.time * 9 < lastWithDrawTime) {
             objShow.operation = "state";
             objShow.showDetail = false
           }
@@ -485,8 +502,9 @@ class Seed extends React.Component<any, Seeds> {
   onChangeSeedNum(e: any) {
     let that = this;
     if (e != null) {
+      let seedinfo=Math.floor(e);
       that.setState({
-        pledgeNum: e * 100
+        pledgeNum: seedinfo * 100
       })
     } else {
       that.setState({
@@ -497,8 +515,9 @@ class Seed extends React.Component<any, Seeds> {
   onChangeSeroNum(e: any) {
     let that = this;
     if (e != null) {
+      let seroinfo=Math.floor(e);
       that.setState({
-        destructionNum: e
+        destructionNum: seroinfo
       })
     } else {
       that.setState({
@@ -526,6 +545,28 @@ class Seed extends React.Component<any, Seeds> {
       visibleRules: false
     })
   }
+
+  openLook= () => {
+    let that = this;
+    that.setState({
+      visiblelook: true
+    })
+  }
+  handlelookOk= () => {
+    let that = this;
+    that.setState({
+      visiblelook: false
+    })
+  };
+
+  handlelookCancel= () => {
+    let that = this;
+    that.setState({
+      visiblelook: false
+    })
+  };
+
+
   viewDetail(e: any) {
     let that = this;
     let userobj = that.state.Listdata.find(function (item: any) {
@@ -561,7 +602,7 @@ class Seed extends React.Component<any, Seeds> {
             >
               <div className="rules">
                 <h2 className="rules-c">
-                  SEEO
+                  SEED
                   {i18n.t("rule1")}
                   </h2>
                 <p className="rules-c">
@@ -639,6 +680,36 @@ class Seed extends React.Component<any, Seeds> {
                 </div>
               </div>
             </Modal>
+            <p style={{float:"right"}} onClick={() => this.openLook()}>
+            {i18n.t("Viewcirculation")}
+            </p>
+            <Modal
+              visible={this.state.visiblelook}
+              title={i18n.t("Viewcirculation")}
+              onOk={this.handlelookOk}
+              onCancel={this.handlelookCancel}
+              okText={i18n.t("confirm")}
+              cancelText={i18n.t("cancel")}
+            >
+              <div className="lookmodal">
+                <div>
+                  <Card>
+                    <Statistic
+                      title={`${i18n.t("Totalcirculation")}SEED`}
+                      
+                      value={this.state.tokennum} 
+                      /> 
+                  </Card>
+                </div>
+                <div>
+                  <Card>
+                  <Statistic
+                    title={`${i18n.t("Totalpledge")}SERO`}
+                    value={this.state.tokenseronum} />
+                     </Card>
+                </div>
+              </div>
+            </Modal>
           </div>
           <div className="seed-header">
             <div className="seed-header-head">
@@ -704,7 +775,6 @@ class Seed extends React.Component<any, Seeds> {
                 <button onClick={this.showPledgeModal}>
                   {i18n.t("culture")}
                   SEED
-                  
                 </button>
                 <Modal
                   title={i18n.t("Inputthenumberofseedcultured")}
@@ -858,12 +928,12 @@ class Seed extends React.Component<any, Seeds> {
               <Descriptions.Item label="">
                 <Statistic value={detailModal.seednum}
                   title={i18n.t("Totalculture")}
-                  suffix={"SEED"} />
+                  suffix={"SEED"}  />
               </Descriptions.Item>
               <Descriptions.Item label="">
                 <Statistic value={detailModal.seednum - detailModal.Unlocked}
-                  title={i18n.t("Incultivation")}
-                  suffix={"SEED"} />
+                  title={i18n.t("Incultivation") }
+                  suffix={"SEED"}  precision={3}/>
               </Descriptions.Item>
               <Descriptions.Item label="">
                 <Statistic value={detailModal.seronum}
@@ -875,17 +945,17 @@ class Seed extends React.Component<any, Seeds> {
               <Descriptions.Item label="">
                 <Statistic value={detailModal.Unlocked && detailModal.Unlocked.toString(10)}
                   title={i18n.t("Harvested")}
-                  suffix={"SEED"} />
+                  suffix={"SEED"}  precision={3}/>
               </Descriptions.Item>
               <Descriptions.Item label="">
                 <Statistic value={detailModal.Withdrawn && detailModal.Withdrawn.toString(10)}
                   title={i18n.t("Extracted")}
-                  suffix={"SEED"} />
+                  suffix={"SEED"} precision={3}/>
               </Descriptions.Item>
               <Descriptions.Item label="">
                 <Statistic value={detailModal.Unlocked && detailModal.Withdrawn && detailModal.Unlocked.minus(detailModal.Withdrawn).toString(10)}
                   title={i18n.t("Extractable")}
-                  suffix={"SEED"} />
+                  suffix={"SEED"} precision={3}/>
               </Descriptions.Item>
             </Descriptions>
 
@@ -914,13 +984,13 @@ function fromValue(v: number | string | undefined, d: number): BigNumber {
 }
 
 
-function toValue(v: number | string | undefined, d: number): BigNumber {
-  if (v) {
-    return new BigNumber(v).multipliedBy(10 ** d)
-  } else {
-    return new BigNumber(0)
-  }
-}
+// function toValue(v: number | string | undefined, d: number): BigNumber {
+//   if (v) {
+//     return new BigNumber(v).multipliedBy(10 ** d)
+//   } else {
+//     return new BigNumber(0)
+//   }
+// }
 
 
 

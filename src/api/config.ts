@@ -1,9 +1,16 @@
-export const address: string = "5HMZX5qPQZJSi8cE1i3vHTrUy3Z9qYfZT3s1LWVCbm7uM3zvJzApT2FjfELYmKLYA71QoArLvTZXZpusPWJyPHDH";
+export const address: string = "2mJjTksWLXMKbyyPi2JfQfDLUcGn3QyWvZT5QZXJpEEWP23Jseih2Qm1z2MFfGw4oAJvGN3H2B8r2CwyW3YWRmpY";
+export const address1: string = "LHQhhHboKziVF7yQpayBqpKVU9cBY7nu7VSaBTfDuSfFLETvDpgrA5coAy5sro3Lvv4PmcaimkvvejSF64Dn6xd";
 export const abi: any = [
     {
         "inputs": [],
         "name": "exchange",
-        "outputs": [],
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
         "stateMutability": "payable",
         "type": "function"
     },
@@ -128,8 +135,29 @@ export const abi: any = [
             }
         ],
         "name": "withDraw",
-        "outputs": [],
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
         "stateMutability": "nonpayable",
         "type": "function"
     }
+]
+export const abi1:any=[
+	{
+		"inputs": [],
+		"name": "totalSupply",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
 ]

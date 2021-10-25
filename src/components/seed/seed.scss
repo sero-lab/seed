@@ -11,10 +11,11 @@
         margin: 0px 20px 65px 20px;
 
         .seed-rules {
-
+            height: 20px;
             p {
                 color: #ffffff;
                 margin-bottom: 3px !important;
+                float: left;
             }
         }
 
@@ -49,7 +50,7 @@
             position: relative;
             z-index: 2;
             border: 2px solid #707a8a;
-
+            height: 500px;
             .content-header {
                 margin: 0px 25px;
                 margin-bottom: 0px;
@@ -113,7 +114,7 @@
 
             .content-list {
                 .content-list-data {
-                    height: calc(100vh - 516px);
+                    height: 260px;
                     overflow-y: scroll;
 
                     li {
@@ -143,6 +144,7 @@
                         }
 
                         .withdrawal {
+                            display: none;
                             color: #ff7400;
                         }
 
@@ -298,6 +300,7 @@
 .no-click {
     pointer-events: none;
     color: gray !important;
+    display: none;
 }
 
 .modalbox {
@@ -407,6 +410,14 @@
     border-radius: 2px;
 }
 
-.ant-statistic-content {
-    font-size: 20px !important;
+.lookmodal {
+    display: flex;
+
+    div {
+        text-align: center;
+        flex: 1;
+        .ant-statistic-title{
+            color: #1c2635 !important;
+        }
+    }
 }

@@ -1,7 +1,7 @@
 import * as config from './config';
 import service from "./service";
-const serojs = require("serojs")
-const seropp = require("sero-pp")
+const serojs = require("serojs");
+const seropp = require("sero-pp");
 
 export interface Params {
     from?: string
@@ -14,9 +14,11 @@ export interface Params {
 }
 class Contract {
     contract: any;
+    contract1: any;
 
     constructor() {
         this.contract = serojs.callContract(config.abi, config.address)
+        this.contract1 = serojs.callContract(config.abi1, config.address1)
     }
 
     async getList(mainPKr: string) {
@@ -43,6 +45,11 @@ class Contract {
         return res;
     }
 
+    async IToken(mainPKr: string){
+        const res=await this.call1("totalSupply",[],mainPKr);
+        return res;
+    }
+
     async call(method: string, args: Array<any>, from: string): Promise<any> {
         const packData: any = this.contract.packData(method, args, true)
         const contract = this.contract;
@@ -63,6 +70,42 @@ class Contract {
                 reject(err)
             })
 
+        })
+    }
+
+    async call1(method: string, args: Array<any>, from: string): Promise<any> {
+        const packData: any = this.contract1.packData(method, args, true)
+        const contract1 = this.contract1;
+        return new Promise((resolve, reject) => {
+            const params: Params = {
+                to: this.contract1.address
+            }
+            params.from = from
+            params.data = packData;
+
+            service.rpc("sero_call", [params, "latest"]).then(data => {
+                if (data != "0x") {
+                    const rest: any = contract1.unPackDataEx(method, data)
+                    resolve(rest)
+                } else {
+                }
+            }).catch(err => {
+                reject(err)
+            })
+
+        })
+    }
+
+    async balanceOf(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            service.rpc("sero_getBalance", [config.address, "latest"]).then(data => {
+                if (data != "0x") {
+                    resolve(data)
+                } else {
+                }
+            }).catch(err => {
+                reject(err)
+            })
         })
     }
 

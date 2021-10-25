@@ -1,7 +1,6 @@
 import * as config from './config';
 import axios from 'axios';
 import i18n from '../i18n';
-// import { resolve } from 'dns';
 const seropp = require("sero-pp");
 
 class Service {
@@ -20,9 +19,7 @@ class Service {
                         clearInterval(id)
                         resolve(rest);
                     } else {
-
                     }
-
                 }).catch(e => {
                     reject(e)
                 })
@@ -78,7 +75,7 @@ class Service {
             barColor: "#2a3a51",
             navColor: "#2a3a51",
             barMode: "dark",
-            navMode: "dark"
+            navMode: "light"
         }
         return new Promise((resolve, reject) => {
             seropp.init(dapp, function (rest: any, err: any) {

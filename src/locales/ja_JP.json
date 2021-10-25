@@ -24,7 +24,7 @@
     "Completed":"完了しました",
     "Redeemable":"請け戻すことができる",
     "recovery":"リサイクル",
-    "Totaldestroyed":"完全に破壊された",
+    "Totaldestroyed":"回収された合計",
     "number":"数",
     "Inputthenumberofseedcultured":"栽培されているSEEDの数を入力してください",
     "culture":"育成する",
@@ -40,7 +40,9 @@
     "rule7":"研究所は最初に10000SEROを誓約し、毎日生産されるSEEDを1：100 SEROでCORSWAPに提出して、SEED / SEROの流動性を提供します",
     "rule8":"循環する各SEEDは、SEED契約プール内の100SEROに対応します",
     "rule9":"SEEDがトランザクションに関与していない場合、SEROの損失は発生しません",
-    "Dayrateofreturn":"リターン",
+    "Dayrateofreturn":"日、回収率",
     "the":"第",
-    "Viewall":"すべてを表示"
+    "Viewall":"すべてを表示",
+    "Viewcirculation":"循環を確認する",
+    "Totalcirculation":"総循環"
   }

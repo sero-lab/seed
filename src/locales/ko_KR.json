@@ -24,7 +24,7 @@
     "Completed":"완료",
     "Redeemable":"교환 가능",
     "recovery":"재활용",
-    "Totaldestroyed":"총 파괴",
+    "Totaldestroyed":"총 복구",
     "number":"수량",
     "Inputthenumberofseedcultured":"재배 된 SEED의 수를 입력하십시오",
     "culture":"기르다",
@@ -40,7 +40,9 @@
     "rule7":"실험실은 10000 SERO를 약속하고 매일 생산되는 SEED를 1 : 100 SERO에 CORSWAP에 제출하여 SEED / SERO 유동성을 제공합니다",
     "rule8":"각 순환 SEED는 SEED 계약 풀의 100 SERO에 해당합니다",
     "rule9":"SEED가 거래에 관여하지 않으면 SERO 손실이 없습니다",
-    "Dayrateofreturn":"일수, 수익률",
+    "Dayrateofreturn":"일수, 회복율",
     "the":"먼저",
-    "Viewall":"전부 보기"
+    "Viewall":"전부 보기",
+    "Viewcirculation":"순환 확인",
+    "Totalcirculation":"총 순환"
   }

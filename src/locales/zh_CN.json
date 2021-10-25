@@ -24,7 +24,7 @@
   "Completed":"已完成",
   "Redeemable":"可赎回的",
   "recovery":"回收",
-  "Totaldestroyed":"销毁总数",
+  "Totaldestroyed":"回收总数",
   "number":"数量",
   "Inputthenumberofseedcultured":"输入培养SEED的数量",
   "culture":"培养",
@@ -40,7 +40,9 @@
   "rule7":"实验室会率先质押10000SERO，并将每天产出的SEED，以1：100SERO提交到CORSWAP提供SEED/SERO的流动性",
   "rule8":"每个流通的SEED对应了SEED合约池中100SERO",
   "rule9":"不将SEED参与交易，你将不会有任何SERO的损失",
-  "Dayrateofreturn":"天，回报率",
+  "Dayrateofreturn":"天，回收率",
   "the":"第",
-  "Viewall":"查看全部"
+  "Viewall":"查看全部",
+  "Viewcirculation":"查看流通",
+  "Totalcirculation":"总流通"
 }
